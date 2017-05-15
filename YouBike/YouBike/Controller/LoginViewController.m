@@ -37,6 +37,13 @@
 }
 
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self configView];
+    
+    
+}
+
 - (void) configView {
     
     UIColor *foregroundColor = [UIColor colorWithRed: 61/255.0 green: 52/255.0 blue: 66/255.0 alpha: 1];

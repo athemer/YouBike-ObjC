@@ -32,11 +32,14 @@
 		2063C8BD1EC17CF20099F8FC /* StationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2063C8AB1EC17CF20099F8FC /* StationTableViewCell.m */; };
 		2063C8BE1EC17CF20099F8FC /* StationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2063C8AC1EC17CF20099F8FC /* StationTableViewCell.xib */; };
 		46BA2248187336019736CD17 /* libPods-YouBike.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE72C6D237BC74E122C6544 /* libPods-YouBike.a */; };
+		D15C98221EC959C700C4A732 /* YouBikeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15C98211EC959C700C4A732 /* YouBikeManager.m */; };
 		D1B1DAA91EC1AAEB00994AD5 /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B1DAA81EC1AAEB00994AD5 /* libFBSDKLoginKit.a */; };
 		D1B1DAAB1EC1AAF100994AD5 /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B1DAAA1EC1AAF100994AD5 /* libFBSDKCoreKit.a */; };
 		D1B1DAAD1EC1AAF500994AD5 /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B1DAAC1EC1AAF500994AD5 /* libFBSDKShareKit.a */; };
 		D1B1DAAF1EC1AAFB00994AD5 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B1DAAE1EC1AAFB00994AD5 /* libBolts.a */; };
 		D1C0FB791EC58DA700D0C269 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB781EC58DA700D0C269 /* Constants.m */; };
+		D1C0FB7C1EC5A61800D0C269 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB7B1EC5A61800D0C269 /* Station.m */; };
+		D1C0FB7F1EC5B25400D0C269 /* LocationMAnager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,12 +87,18 @@
 		8F482465F4FB58E838E9C096 /* Pods-YouBike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouBike.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouBike/Pods-YouBike.debug.xcconfig"; sourceTree = "<group>"; };
 		9BA5818494562274EA31FFE6 /* Pods-YouBike.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouBike.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouBike/Pods-YouBike.release.xcconfig"; sourceTree = "<group>"; };
 		ABE72C6D237BC74E122C6544 /* libPods-YouBike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YouBike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15C98201EC959C700C4A732 /* YouBikeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouBikeManager.h; sourceTree = "<group>"; };
+		D15C98211EC959C700C4A732 /* YouBikeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouBikeManager.m; sourceTree = "<group>"; };
 		D1B1DAA81EC1AAEB00994AD5 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "../../Library/Developer/Xcode/DerivedData/YouBike-egfagpyyhjdtfogskqakxwclkktn/Build/Products/Debug-iphonesimulator/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
 		D1B1DAAA1EC1AAF100994AD5 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "../../Library/Developer/Xcode/DerivedData/YouBike-egfagpyyhjdtfogskqakxwclkktn/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
 		D1B1DAAC1EC1AAF500994AD5 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "../../Library/Developer/Xcode/DerivedData/YouBike-egfagpyyhjdtfogskqakxwclkktn/Build/Products/Debug-iphonesimulator/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
 		D1B1DAAE1EC1AAFB00994AD5 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "../../Library/Developer/Xcode/DerivedData/YouBike-egfagpyyhjdtfogskqakxwclkktn/Build/Products/Debug-iphonesimulator/Bolts/libBolts.a"; sourceTree = "<group>"; };
 		D1C0FB771EC58DA700D0C269 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Controller/Constants.h; sourceTree = "<group>"; };
 		D1C0FB781EC58DA700D0C269 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Controller/Constants.m; sourceTree = "<group>"; };
+		D1C0FB7A1EC5A61800D0C269 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		D1C0FB7B1EC5A61800D0C269 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		D1C0FB7D1EC5B25400D0C269 /* LocationMAnager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMAnager.h; sourceTree = "<group>"; };
+		D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMAnager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +147,12 @@
 				2063C87D1EC17CCA0099F8FC /* YouBike.xcdatamodeld */,
 				D1C0FB771EC58DA700D0C269 /* Constants.h */,
 				D1C0FB781EC58DA700D0C269 /* Constants.m */,
+				D1C0FB7D1EC5B25400D0C269 /* LocationMAnager.h */,
+				D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */,
+				D1C0FB7A1EC5A61800D0C269 /* Station.h */,
+				D1C0FB7B1EC5A61800D0C269 /* Station.m */,
+				D15C98201EC959C700C4A732 /* YouBikeManager.h */,
+				D15C98211EC959C700C4A732 /* YouBikeManager.m */,
 				2063C88B1EC17CF20099F8FC /* Controller */,
 				2063C8A21EC17CF20099F8FC /* StoryboardiPad.storyboard */,
 				2063C8A31EC17CF20099F8FC /* View */,
@@ -348,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2063C87F1EC17CCA0099F8FC /* YouBike.xcdatamodeld in Sources */,
+				D15C98221EC959C700C4A732 /* YouBikeManager.m in Sources */,
 				2063C8BB1EC17CF20099F8FC /* StationCollectionViewCell.m in Sources */,
 				2063C8B11EC17CF20099F8FC /* ProfileViewController.m in Sources */,
 				2063C8B61EC17CF20099F8FC /* TabBarViewController.m in Sources */,
@@ -359,8 +375,10 @@
 				2063C8B31EC17CF20099F8FC /* StationCollectionViewController.m in Sources */,
 				2063C8B71EC17CF20099F8FC /* ViewController.m in Sources */,
 				2063C8BD1EC17CF20099F8FC /* StationTableViewCell.m in Sources */,
+				D1C0FB7F1EC5B25400D0C269 /* LocationMAnager.m in Sources */,
 				2063C8B01EC17CF20099F8FC /* ProfileNavigationController.m in Sources */,
 				2063C8B21EC17CF20099F8FC /* SplitViewController.m in Sources */,
+				D1C0FB7C1EC5A61800D0C269 /* Station.m in Sources */,
 				2063C8B51EC17CF20099F8FC /* StationTableViewController.m in Sources */,
 				2063C8AD1EC17CF20099F8FC /* LoginViewController.m in Sources */,
 				2063C8AF1EC17CF20099F8FC /* MapTableViewController.m in Sources */,

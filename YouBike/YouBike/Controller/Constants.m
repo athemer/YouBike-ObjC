@@ -26,7 +26,7 @@ static NSString *get = @"GET";
 
 
 // URLString
-static NSString *server = @"http://52.34.47.148";
+static NSString *server = @"http://52.198.40.72/youbike/v1";
 static NSString *login = @"/sign-in/facebook";
 static NSString *station = @"/stations";
 static NSString *comment = @"/comment";
