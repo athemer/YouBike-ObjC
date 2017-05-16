@@ -93,7 +93,7 @@
                                 failure: (void (^)(NSError * error)) faulureHandler {
     
     
-    MKPlacemark *const sourcePlaceMark  = [[MKPlacemark alloc] initWithCoordinate: *sourceCoordinate addressDictionary: NULL];
+    MKPlacemark * const sourcePlaceMark  = [[MKPlacemark alloc] initWithCoordinate: *sourceCoordinate addressDictionary: NULL];
     MKMapItem * const sourceMapItem = [[MKMapItem alloc] initWithPlacemark: sourcePlaceMark];
                                     
     MKPlacemark *const destinationPlaceMark  = [[MKPlacemark alloc] initWithCoordinate: *destinationCooridenate addressDictionary: NULL];
@@ -105,7 +105,7 @@
     directionsRequest.source = sourceMapItem;
     directionsRequest.destination = destinationMapItem;
                                     
-    MKDirections * const directions = [[MKDirections alloc] initWithRequest:directionsRequest];
+    MKDirections * const directions = [[MKDirections alloc] initWithRequest: directionsRequest];
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
                                        
         if (error != nil) {

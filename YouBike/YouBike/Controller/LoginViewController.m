@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "Constants.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 
 @interface LoginViewController ()
@@ -28,6 +30,14 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES ];
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault];
     
+    
+    
+//    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+//    loginButton.center = self.view.center;
+//    [self.view addSubview:loginButton];
+    
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -40,7 +50,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self configView];
-    
     
 }
 
@@ -90,7 +99,7 @@
         
         NSString *token = result.token.tokenString;
         
-        [NSUserDefaults.standardUserDefaults setObject:token forKey: [Constants email]];
+        [NSUserDefaults.standardUserDefaults setObject: token forKey: @"email"];
         
         [self fetchProfile];
     }];
@@ -110,35 +119,43 @@
         
         NSLog(@"Result: %@", result);
         
-        NSString *name = [result valueForKey: @"name"];
-        NSString *email = [result valueForKey: @"email"];
-        NSDictionary *picture = [result valueForKey: @"picture"];
-        NSDictionary *data = [picture valueForKey: @"data"];
-        NSString *url = [data valueForKey: @"url"];
-        NSDictionary *cover = [result valueForKey: @"cover"];
-        NSString *source = [cover valueForKey: @"source"];
+        NSString *name = result[@"name"];
+        NSString *email = result[@"email"];
+        NSDictionary *picture = result[@"picture"];
+        NSDictionary *data = picture[@"data"];
+        NSString *url = data[@"url"];
+        NSDictionary *cover = result[@"cover"];
+        NSString *link = result[@"link"];
+
         
         if (name != nil) {
             
-            [[NSUserDefaults standardUserDefaults] setValue: name forKey: [Constants name]];
+            [[NSUserDefaults standardUserDefaults] setValue: name forKey: @"name"];
             
         }
 
         if (email != nil) {
             
-            [[NSUserDefaults standardUserDefaults] setValue: email forKey: [Constants email]];
+            [[NSUserDefaults standardUserDefaults] setValue: email forKey: @"email"];
+            
+        }
+        
+        if (link != nil) {
+            
+            [[NSUserDefaults standardUserDefaults] setValue: link forKey: @"link"];
             
         }
 
         if (url != nil) {
             
-            [[NSUserDefaults standardUserDefaults] setValue: url forKey: [Constants picture]];
+            [[NSUserDefaults standardUserDefaults] setValue: url forKey: @"url"];
 
         }
         
+        
         if (cover != nil) {
             
-            [[NSUserDefaults standardUserDefaults] setValue: cover forKey: [Constants cover]];
+            [[NSUserDefaults standardUserDefaults] setValue: cover forKey: @"cover"];
             
         }
         
@@ -149,8 +166,12 @@
 }
 
 -(void) nextVC {
-    UIViewController * VC = [self.storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-    UIApplication.sharedApplication.keyWindow.rootViewController = VC;
+    
+    UIViewController * VC = [self.storyboard instantiateViewControllerWithIdentifier: @"tabBarController"];
+    
+    [self presentViewController: VC animated:YES completion: NULL];
+    
+   // UIApplication.sharedApplication.keyWindow.rootViewController = VC;
 }
 
 

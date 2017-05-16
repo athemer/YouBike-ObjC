@@ -12,28 +12,28 @@
 
 
 // FB Login
-static NSString *publicProfile = @"public_profile";
-static NSString *email = @"email";
-static NSString *name = @"name";
-static NSString *links = @"link";
-static NSString *picture = @"picture";
-static NSString *cover = @"cover";
-static NSString *accessToken = @"accessToken";
+NSString *publicProfile = @"public_profile";
+NSString *email = @"email";
+NSString *name = @"name";
+NSString *links = @"link";
+NSString *picture = @"picture";
+NSString *cover = @"cover";
+NSString *accessToken = @"accessToken";
 
 // HTTPRequest
-static NSString *post = @"POST";
-static NSString *get = @"GET";
+NSString *post = @"POST";
+NSString *get = @"GET";
 
 
 // URLString
-static NSString *server = @"http://52.198.40.72/youbike/v1";
-static NSString *login = @"/sign-in/facebook";
-static NSString *station = @"/stations";
-static NSString *comment = @"/comment";
+NSString *server = @"http://52.198.40.72/youbike/v1";
+NSString *login = @"/sign-in/facebook";
+NSString *station = @"/stations";
+NSString *comment = @"/comment";
 
 
 // URLReturnData
 
-static NSString *SignInReturn = @"signInWithFacebookData";
+NSString *signInReturn = @"signInWithFacebookData";
 
 @end

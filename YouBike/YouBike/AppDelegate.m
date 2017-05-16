@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface AppDelegate ()
 
@@ -18,13 +20,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[FBSDKApplicationDelegate sharedInstance] application: application didFinishLaunchingWithOptions:launchOptions];
+    
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
     navigationBarAppearance.barTintColor = [UIColor colorWithRed: 61/255.0 green: 52/255.0 blue: 66/255.0 alpha: 1];
     [navigationBarAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:251/255.0 green:197/255.0 blue:111/255.0 alpha:1]}];
     
-    UITabBar *tabBarAppearance = [UITabBar appearance];
+    UITabBar * tabBarAppearance = [UITabBar appearance];
     tabBarAppearance.tintColor = [UIColor colorWithRed:251/255.0 green:197/255.0 blue:111/255.0 alpha:1];
     tabBarAppearance.barTintColor = [UIColor colorWithRed: 61/255.0 green: 52/255.0 blue: 66/255.0 alpha: 1];
+    
+    
+    if ([FBSDKAccessToken currentAccessToken] != nil ) {
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName: @"Main" bundle: nil];
+        UIViewController * VC = [storyboard  instantiateViewControllerWithIdentifier: @"tabBarController"];
+        self.window.rootViewController = VC;
+        
+        NSLog(@"accessToken is NOT nil");
+        
+    } else {
+        
+        NSLog(@"accessToken is nil");
+        
+    }
+    
+    NSLog(@"AccessToken %@", [[FBSDKAccessToken currentAccessToken ] tokenString ]);
     
     return YES;
 }
@@ -43,7 +64,7 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [FBSDKAppEvents activateApp];
 }
 
 
@@ -102,6 +123,16 @@
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
     }
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 @end

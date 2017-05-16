@@ -34,6 +34,6 @@
 
 // URLReturnData
 
-@property (class) NSString *SignInReturn;
+@property (class) NSString *signInReturn;
 @end
 

@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "Constants.h"
+#import <AFNetworking.h>
+
 
 
 @interface YouBikeManager : NSObject <NSURLSessionDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate>
+
+
 
 @property (class) YouBikeManager *shared;
 @property NSUserDefaults *userDefault;
