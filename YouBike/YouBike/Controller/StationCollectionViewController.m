@@ -21,13 +21,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    
+
     [self.collectionView registerNib:[UINib nibWithNibName:@"StationCollectionViewCell" bundle:nil] forCellWithReuseIdentifier: @"CollectionCell"];
+    
     self.collectionView.collectionViewLayout = [self setUpFlowLayout];
     
     self.collectionView.backgroundColor = [UIColor colorWithRed:166/255.0 green:145/255.0 blue:84/255.0 alpha:1];
@@ -35,21 +31,16 @@ static NSString * const reuseIdentifier = @"Cell";
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"Appear");
 }
 
-/*
-#pragma mark - Navigation
+-(void)viewWillDisappear:(BOOL)animated {
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [super viewWillDisappear:animated];
+    NSLog(@"Disappear");
 }
-*/
-
 
 #pragma mark - Helper Method
 
@@ -81,7 +72,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    NSLog(@"Station Count: %lu", (unsigned long)self.station.count);
+    NSLog(@"Station Count numba is : %lu", (unsigned long)self.station.count);
     
     return self.station.count;
 }

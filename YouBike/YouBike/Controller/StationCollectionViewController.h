@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Station.h"
-
+#import "MapTableViewController.h"
 
 @interface StationCollectionViewController : UICollectionViewController
 

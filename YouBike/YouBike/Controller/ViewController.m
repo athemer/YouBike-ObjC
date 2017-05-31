@@ -30,7 +30,7 @@
     
     [self setUpSegmentControl];
     
-    [self.navigationController setNavigationBarHidden:false animated:true];
+    [self.navigationController setNavigationBarHidden:false animated: true];
     
     self.navigationController.navigationBar.translucent = false;
     
@@ -76,6 +76,21 @@
     return _stationTableViewController;
 }
 
+- (StationCollectionViewController *)stationCollectionViewController {
+
+    if (!_stationCollectionViewController) {
+
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+        _stationCollectionViewController = (StationCollectionViewController *)[storyboard instantiateViewControllerWithIdentifier:@"StationCollectionViewController"];
+
+        [self addAsChildViewControlle:_stationCollectionViewController];
+
+    }
+
+    return _stationCollectionViewController;
+
+}
 
 
 //-(void) addTableViewVC {
@@ -174,10 +189,10 @@
 - (void)manager:(YouBikeManager *)manager didGet:(NSArray <Station *> *)stations {
     
     self.stationTableViewController.station = stations;
-//    self.stationCollectionViewController.station = stations;
-    
+    self.stationCollectionViewController.station = stations;
+
     [self.stationTableViewController.tableView reloadData];
-//    [self.stationCollectionViewController.collectionView reloadData];
+    [self.stationCollectionViewController.collectionView reloadData];
     
     NSLog(@"numCHECK %lu", (unsigned long) self.stationTableViewController.station.count);
 }
