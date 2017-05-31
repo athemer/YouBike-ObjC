@@ -37,6 +37,8 @@
         UIViewController * VC = [storyboard  instantiateViewControllerWithIdentifier: @"tabBarController"];
         self.window.rootViewController = VC;
         
+        
+        
         NSLog(@"accessToken is NOT nil");
         
     } else {

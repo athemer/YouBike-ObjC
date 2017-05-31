@@ -12,11 +12,11 @@
 
 @property NSString *name;
 @property NSString *address;
-@property NSNumber *numberOfRemainingBikes;
-@property NSNumber *lati;
-@property NSNumber *longi;
+@property int numberOfRemainingBikes;
+@property double lati;
+@property double longi;
 @property NSString *stationID;
 
-- (id)initName: (NSString *)name address: (NSString *)address numberOfRemainingBikes: (NSNumber *)numberOfRemainingBikes lati: (NSNumber *)lati longi:(NSNumber *) longi stationID: (NSString *)stationID;
+- (id)initName: (NSString *)name address: (NSString *)address numberOfRemainingBikes: (int )numberOfRemainingBikes lati: (double) lati longi:(double) longi stationID: (NSString *)stationID;
 
 @end

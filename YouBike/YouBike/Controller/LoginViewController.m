@@ -97,6 +97,7 @@
             NSLog(@"error: %@", error);
         }
         
+        
         NSString *token = result.token.tokenString;
         
         [NSUserDefaults.standardUserDefaults setObject: token forKey: @"email"];

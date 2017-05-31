@@ -7,8 +7,14 @@
 //
 
 #import "StationTableViewController.h"
+#import "StationTableViewCell.h"
+#import "YouBikeManager.h"
+
 
 @interface StationTableViewController ()
+
+
+
 
 @end
 
@@ -17,6 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [self.tableView registerNib:[UINib nibWithNibName: @"StationTableViewCell"
+                                               bundle: nil]
+         forCellReuseIdentifier: @"StationTableViewCell"];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -29,27 +40,63 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    
+    NSLog(@"====================viewWillAppear==================");
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    
+    [super viewDidAppear:animated];
+    
+    NSLog(@"-------------------- viewDidAppear --------------------");
+    
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    
+    NSLog(@"???????? %lu", (unsigned long)self.station.count);
+    
+    return self.station.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    StationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"StationTableViewCell" forIndexPath:indexPath];
+    
+    
+    cell.addressLabel.text = self.station[indexPath.row].address;
+    cell.nameLabel.text = self.station[indexPath.row].name;
+    cell.bikesLabel.text = @"台";
+    cell.numberLabel.text = [NSString stringWithFormat: @"%d", self.station[indexPath.row].numberOfRemainingBikes];
+    cell.remainLabel.text = @"剩";
     
     return cell;
 }
-*/
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+
+    return 120;
+    
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -94,5 +141,35 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger lastElement = self.station.count - 1;
+    
+    if (indexPath.row == lastElement && YouBikeManager.sharedInstance.stationParameter != nil) {
+        [YouBikeManager.sharedInstance getStations];
+    }
+    
+}
+
+
+#pragma mark - Helper Method
+- (void)viewMap:(UIButton *)sender {
+    
+    StationTableViewCell *cell = (StationTableViewCell *)sender.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    Station *selectedStation = self.station[indexPath.row];
+    
+    MapTableViewController *MVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapTableViewController"];
+    
+    MVC.selectedStation = selectedStation;
+    MVC.isFromButton = true;
+    
+    MVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:MVC animated:true];
+    
+}
+
 
 @end

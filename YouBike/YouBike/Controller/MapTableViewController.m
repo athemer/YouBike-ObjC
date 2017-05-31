@@ -8,7 +8,29 @@
 
 #import "MapTableViewController.h"
 
-@interface MapTableViewController ()
+
+typedef NS_ENUM(NSInteger, Components) {
+    
+    StationDetail,
+    Map,
+    Segment,
+    Comments
+    
+};
+
+
+@interface MapTableViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+
+{
+    NSArray *components;
+}
+
+
+@property (strong, nonatomic) NSArray<Comment *>* comments;
+@property (strong, nonatomic) MKMapView *mapView;
+@property (assign, nonatomic) CLLocationCoordinate2D stationLocation;
+@property (strong, nonatomic) CLLocation *nowLocation;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -24,75 +46,256 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc {
+    
+    [self.timer invalidate];
+    [LocationMAnager.sharedInstance stop];
+    
+}
+
+- (NSArray<Comment *> *)comments {
+    
+    if (!_comments) {
+        
+        _comments = [[NSArray<Comment *> alloc] init];
+        
+    }
+    
+    return _comments;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    
+    return components.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    int value = [components[section] intValue];
     
-    return cell;
+    switch (value) {
+        case Comments:
+            return self.comments.count;
+            break;
+            
+        default:
+            return 1;
+            break;
+    }
+    
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - Helper Method
+- (void)onChange:(UISegmentedControl *)sender {
+    
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.mapView.mapType = MKMapTypeStandard;
+            break;
+            
+        case 1:
+            self.mapView.mapType = MKMapTypeSatellite;
+            break;
+            
+        case 2:
+            self.mapView.mapType = MKMapTypeHybrid;
+            
+        default:
+            break;
+    }
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)setUp {
+    
+    [self.navigationItem setTitle:self.selectedStation.name];
+    self.navigationController.hidesBottomBarWhenPushed = true;
+    
+    if (self.isFromButton) {
+        components = [[NSArray alloc] initWithObjects:@(Map), @(Segment), @(Comments), nil];
+    } else {
+        components = [[NSArray alloc] initWithObjects:@(StationDetail), @(Map), @(Segment), @(Comments), nil];
+    }
+    
+    self.mapView.delegate = self;
+    
+    [self getUserLocation];
+    
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)setUpMapView {
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    
+    self.stationLocation = CLLocationCoordinate2DMake(self.selectedStation.lati, self.selectedStation.longi);
+    
+    annotation.coordinate = self.stationLocation;
+    
+    [self.mapView addAnnotation:annotation];
+    
+    self.mapView.delegate = self;
+    
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
+    MKCoordinateRegion region = MKCoordinateRegionMake(self.stationLocation, span);
+    
+    [self.mapView setRegion:region];
+    
+    [self.mapView setShowsUserLocation:true];
+    
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (void)getUserLocation {
+    
+    LocationMAnager.sharedInstance.locationManager.delegate = self;
+    [LocationMAnager.sharedInstance requestUserLocationWhenInUse];
+    [LocationMAnager.sharedInstance start];
+    
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    int value = [components[indexPath.section] intValue];
+    
+    switch (value) {
+        case StationDetail:
+            return 120;
+            break;
+            
+        case Map:
+            return  self.isFromButton ? self.view.frame.size.height - 44 : self.view.frame.size.height - 120 - 44;
+            break;
+            
+        case Segment:
+            return 44;
+            break;
+            
+        default:
+            return UITableViewAutomaticDimension;
+            break;
+    }
+    
 }
-*/
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    int value = [components[indexPath.section] intValue];
+    
+    if (value == StationDetail) {
+        
+        StationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        cell.nameLabel.text = self.selectedStation.name;
+        cell.addressLabel.text = self.selectedStation.address;
+        cell.numberLabel.text = [NSString stringWithFormat:@"%d", self.selectedStation.numberOfRemainingBikes];
+        [cell.mapButton setHidden:true];
+        cell.markerImageView.image = [cell.markerImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        cell.markerImageView.tintColor = [UIColor colorWithRed:160/255.0 green:98/255.0 blue:90/255.0 alpha:1];
+        
+        return cell;
+        
+    } else if (value == Map) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell" forIndexPath:indexPath];
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        self.mapView.frame = cell.contentView.frame;
+        [cell.contentView addSubview:self.mapView];
+        
+        return cell;
+        
+    } else if (value == Segment) {
+        
+        SegmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SegmentTableViewCell" forIndexPath:indexPath];
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        [cell.segment addTarget:self action:@selector(onChange:) forControlEvents:UIControlEventValueChanged];
+        
+        UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, cell.segment.frame.size.width, cell.contentView.frame.size.height)];
+        [commentLabel setText:@"Comment"];
+        [commentLabel setTextColor:[UIColor colorWithRed:251/255.0 green:197/255.0 blue:111/255.0 alpha:1]];
+        
+        if (self.isFromButton == false) {
+            [cell.segment setHidden:true];
+            [cell.contentView addSubview:commentLabel];
+        }
+        
+        return cell;
+        
+    } else if (value == Comments) {
+        
+        CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CommentTableViewCell" forIndexPath:indexPath];
+        
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        cell.usernameLabel.text = self.comments[indexPath.row].username;
+        cell.dateLabel.text = self.comments[indexPath.row].time;
+        cell.commentLabel.text = self.comments[indexPath.row].text;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSURL *url = [NSURL URLWithString:self.comments[indexPath.row].userPictureUrl];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *userPicture = [UIImage imageWithData:data];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.userImageView.image = userPicture;
+            });
+        });
+        
+        
+        return cell;
+        
+    }
+    
+    return [[UITableViewCell alloc] init];
+}
+
+    - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+        
+        NSInteger lastElement = self.comments.count - 1;
+        
+        if (indexPath.row == lastElement && YouBikeManager.sharedInstance.commentParameter != nil) {
+            [YouBikeManager.sharedInstance getCommentWithID:self.selectedStation.stationID withCompletionHandler:^(NSMutableArray<Comment *> * _Nullable comments, NSError * _Nullable error) {
+                
+                self.comments = comments;
+                
+                [self.tableView reloadData];
+                
+            }];
+        }
+        
+    }
+
+#pragma mark - CLLocationManagerDelegate
+    - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+        
+        // Receive Location
+        self.nowLocation = locations.lastObject;
+        
+        if (self.isFromButton) {
+            
+            self.timer = [[NSTimer alloc] init];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getRoute) userInfo:nil repeats:false];
+            
+        }
+    }
+    
+#pragma mark - MKMapViewDelegate
+    - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+        
+        MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
+        
+        renderer.strokeColor = [UIColor colorWithRed:201/255.0 green:28/255.0 blue:187/255.0 alpha:1];
+        renderer.lineWidth = 7;
+        
+        return renderer;
+        
+    }
 
 @end

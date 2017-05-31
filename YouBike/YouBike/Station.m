@@ -12,7 +12,7 @@
 
 
 
-- (id)initName: (NSString *)name address: (NSString *)address numberOfRemainingBikes: (NSNumber *)numberOfRemainingBikes lati: (NSNumber *)lati longi:(NSNumber *) longi stationID: (NSString *)stationID {
+- (id)initName: (NSString *)name address: (NSString *)address numberOfRemainingBikes: (int)numberOfRemainingBikes lati: (double)lati longi:(double) longi stationID: (NSString *)stationID {
     
     self = [super init];
     if (self) {

@@ -18,13 +18,18 @@
 @property (strong, nonatomic) CLPlacemark *nowPlaceMark;
 @property Boolean *isFirstLocationReceived;
 
-@property (class) LocationMAnager * shared;
 
 
++ (instancetype)sharedInstance;
+- (void)requestUserLocationAlways;
+- (void)requestUserLocationWhenInUse;
+- (void)start;
+- (void)stop;
 - (void) getPlylineWithsourceCoordinate: (CLLocationCoordinate2D *) sourceCoordinate
                  destinationCooridenate: (CLLocationCoordinate2D *) destinationCooridenate
                           transportType: (MKDirectionsTransportType *) transportType
                                 success: (void (^)(MKPolyline * ployilne)) successHandler
                                 failure: (void (^)(NSError * error)) faulureHandler;
+
 
 @end

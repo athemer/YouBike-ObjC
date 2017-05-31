@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Station.h"
+#import "MapTableViewController.h"
 
 @interface StationTableViewController : UITableViewController
+
+
+@property (strong, nonatomic) NSArray <Station*> * station;
 
 @end

@@ -40,6 +40,9 @@
 		D1C0FB791EC58DA700D0C269 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB781EC58DA700D0C269 /* Constants.m */; };
 		D1C0FB7C1EC5A61800D0C269 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB7B1EC5A61800D0C269 /* Station.m */; };
 		D1C0FB7F1EC5B25400D0C269 /* LocationMAnager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */; };
+		D1EB7D621ED27B8700E0ED8B /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D1EB7D611ED27B8700E0ED8B /* Comment.m */; };
+		D1EB7D661ED27D8700E0ED8B /* SegmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1EB7D641ED27D8700E0ED8B /* SegmentTableViewCell.m */; };
+		D1EB7D671ED27D8700E0ED8B /* SegmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1EB7D651ED27D8700E0ED8B /* SegmentTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +102,11 @@
 		D1C0FB7B1EC5A61800D0C269 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		D1C0FB7D1EC5B25400D0C269 /* LocationMAnager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMAnager.h; sourceTree = "<group>"; };
 		D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMAnager.m; sourceTree = "<group>"; };
+		D1EB7D601ED27B8700E0ED8B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		D1EB7D611ED27B8700E0ED8B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		D1EB7D631ED27D8700E0ED8B /* SegmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentTableViewCell.h; sourceTree = "<group>"; };
+		D1EB7D641ED27D8700E0ED8B /* SegmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentTableViewCell.m; sourceTree = "<group>"; };
+		D1EB7D651ED27D8700E0ED8B /* SegmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,8 @@
 				2063C87D1EC17CCA0099F8FC /* YouBike.xcdatamodeld */,
 				D1C0FB771EC58DA700D0C269 /* Constants.h */,
 				D1C0FB781EC58DA700D0C269 /* Constants.m */,
+				D1EB7D601ED27B8700E0ED8B /* Comment.h */,
+				D1EB7D611ED27B8700E0ED8B /* Comment.m */,
 				D1C0FB7D1EC5B25400D0C269 /* LocationMAnager.h */,
 				D1C0FB7E1EC5B25400D0C269 /* LocationMAnager.m */,
 				D1C0FB7A1EC5A61800D0C269 /* Station.h */,
@@ -203,6 +213,9 @@
 			children = (
 				2063C8A41EC17CF20099F8FC /* CommentTableViewCell.h */,
 				2063C8A51EC17CF20099F8FC /* CommentTableViewCell.m */,
+				D1EB7D631ED27D8700E0ED8B /* SegmentTableViewCell.h */,
+				D1EB7D641ED27D8700E0ED8B /* SegmentTableViewCell.m */,
+				D1EB7D651ED27D8700E0ED8B /* SegmentTableViewCell.xib */,
 				2063C8A61EC17CF20099F8FC /* CommentTableViewCell.xib */,
 				2063C8A71EC17CF20099F8FC /* StationCollectionViewCell.h */,
 				2063C8A81EC17CF20099F8FC /* StationCollectionViewCell.m */,
@@ -304,6 +317,7 @@
 				2063C8BE1EC17CF20099F8FC /* StationTableViewCell.xib in Resources */,
 				2063C8BA1EC17CF20099F8FC /* CommentTableViewCell.xib in Resources */,
 				2063C8BC1EC17CF20099F8FC /* StationCollectionViewCell.xib in Resources */,
+				D1EB7D671ED27D8700E0ED8B /* SegmentTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +379,12 @@
 				2063C87F1EC17CCA0099F8FC /* YouBike.xcdatamodeld in Sources */,
 				D15C98221EC959C700C4A732 /* YouBikeManager.m in Sources */,
 				2063C8BB1EC17CF20099F8FC /* StationCollectionViewCell.m in Sources */,
+				D1EB7D621ED27B8700E0ED8B /* Comment.m in Sources */,
 				2063C8B11EC17CF20099F8FC /* ProfileViewController.m in Sources */,
 				2063C8B61EC17CF20099F8FC /* TabBarViewController.m in Sources */,
 				2063C8B41EC17CF20099F8FC /* StationNavigationController.m in Sources */,
 				2063C8761EC17CCA0099F8FC /* AppDelegate.m in Sources */,
+				D1EB7D661ED27D8700E0ED8B /* SegmentTableViewCell.m in Sources */,
 				2063C8731EC17CCA0099F8FC /* main.m in Sources */,
 				2063C8B91EC17CF20099F8FC /* CommentTableViewCell.m in Sources */,
 				2063C8AE1EC17CF20099F8FC /* MapNavigationController.m in Sources */,
