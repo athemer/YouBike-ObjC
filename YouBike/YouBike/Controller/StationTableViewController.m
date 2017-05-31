@@ -86,7 +86,16 @@
     cell.bikesLabel.text = @"台";
     cell.numberLabel.text = [NSString stringWithFormat: @"%d", self.station[indexPath.row].numberOfRemainingBikes];
     cell.remainLabel.text = @"剩";
-    
+
+    cell.mapButton.layer.borderWidth = 1;
+    cell.mapButton.layer.borderColor = [UIColor colorWithRed:204/255.0 green:113/255.0 blue:93/255.0 alpha:1].CGColor;
+    cell.mapButton.layer.cornerRadius = 4;
+    cell.mapButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [cell.mapButton addTarget:self action:@selector(viewMap:) forControlEvents:UIControlEventTouchUpInside];
+
+    cell.markerImageView.image = [cell.markerImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    cell.markerImageView.tintColor = [UIColor colorWithRed:160/255.0 green:98/255.0 blue:90/255.0 alpha:1];
+
     return cell;
 }
 
@@ -141,6 +150,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    Station *selectedStation = self.station[indexPath.row];
+
+        MapTableViewController *MVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MapTableViewController"];
+
+        MVC.selectedStation = selectedStation;
+        MVC.isFromButton = false;
+
+        MVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:MVC animated:true];
+
+}
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     

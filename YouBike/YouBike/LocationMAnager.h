@@ -25,11 +25,11 @@
 - (void)requestUserLocationWhenInUse;
 - (void)start;
 - (void)stop;
-- (void) getPlylineWithsourceCoordinate: (CLLocationCoordinate2D *) sourceCoordinate
-                 destinationCooridenate: (CLLocationCoordinate2D *) destinationCooridenate
-                          transportType: (MKDirectionsTransportType *) transportType
-                                success: (void (^)(MKPolyline * ployilne)) successHandler
-                                failure: (void (^)(NSError * error)) faulureHandler;
+- (void)getPolylineFrom:(CLLocationCoordinate2D)sourceCoordinate
+                     to:(CLLocationCoordinate2D)destinationCoordinate
+      withTransportType:(MKDirectionsTransportType)transportType
+  withCompletionHandler:(void (^_Nullable)(MKPolyline *_Nullable polyline, NSError *_Nullable error))completionHandler;
+
 
 
 @end

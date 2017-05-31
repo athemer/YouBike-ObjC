@@ -37,16 +37,6 @@
     return self;
 }
 
-- (void)requestWhenInUse {
-    
-    [self.locationManager requestWhenInUseAuthorization];
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.activityType = CLActivityTypeOther;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    self.locationManager.distanceFilter = 10.0;
-    
-}
 
 
 - (void)requestAlwaysInUse {
@@ -62,16 +52,16 @@
     
 }
 
-- (void)start {
-    
-    [self.locationManager startUpdatingLocation];
+- (void)requestUserLocationWhenInUse {
 
-}
 
--(void)stop {
-    
-    [self.locationManager stopUpdatingLocation];
-    
+    [self.locationManager requestWhenInUseAuthorization];
+
+    // Set Location Parameter
+    self.locationManager.desiredAccuracy    = kCLLocationAccuracyHundredMeters;
+    self.locationManager.activityType       = CLActivityTypeOtherNavigation;
+    self.locationManager.distanceFilter     = 10.0;
+
 }
 
 
@@ -147,36 +137,46 @@
 //}
 
 
+- (void)start {
+
+    [self.locationManager startUpdatingLocation];
+
+}
+
+- (void)stop {
+    [self.locationManager stopUpdatingLocation];
+}
+
 - (void)getPolylineFrom:(CLLocationCoordinate2D)sourceCoordinate
                      to:(CLLocationCoordinate2D)destinationCoordinate
       withTransportType:(MKDirectionsTransportType)transportType
   withCompletionHandler:(void (^)(MKPolyline *__nullable polyline, NSError *__nullable error))completionHandler {
-    
+
     MKPlacemark *sourcePlacemark            = [[MKPlacemark alloc] initWithCoordinate:sourceCoordinate];
     MKMapItem *sourceMapItem                = [[MKMapItem alloc] initWithPlacemark:sourcePlacemark];
-    
+
     MKPlacemark *destinationPlacemark       = [[MKPlacemark alloc] initWithCoordinate:destinationCoordinate];
     MKMapItem *destinationMapItem           = [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
-    
+
     MKDirectionsRequest *directionRequest   = [[MKDirectionsRequest alloc] init];
     directionRequest.transportType          = transportType;
     directionRequest.source                 = sourceMapItem;
     directionRequest.destination            = destinationMapItem;
-    
+
     MKDirections *directions = [[MKDirections alloc] initWithRequest:directionRequest];
-    
+
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
-        
+
         if (error != nil) {
             completionHandler(nil, error);
         }
-        
+
         MKPolyline *polyline = response.routes.firstObject.polyline;
-        
+
         completionHandler(polyline, nil);
-        
+
     }];
-    
+
 }
 
 @end
