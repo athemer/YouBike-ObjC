@@ -11,4 +11,4 @@ this is a co-working project @ AppWorks School
 
 * using facebook SDK to deal with login 
 * data of Youbike are from Data Taipei, but we manipulated it and put it in a personal server, which mean the data is not synchronized 
-* built with Objective-c, check my repository for swift version.
+* built with Objective-c, check my repository for swift version "Youbiker".
